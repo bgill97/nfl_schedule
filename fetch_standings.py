@@ -44,11 +44,12 @@ team_divisions = {
     "ARI":"NFCW",
     "SEA":"NFCW"}
 
-standings = pd.DataFrame({"team": teams,"w": 0,"l": 0,"t": 0})
-standings["div"] = standings["team"].map(team_divisions)
-print(standings)
+standings = pd.DataFrame({"team": teams,"w": 0,"l": 0,"t": 0}).set_index("team")
+standings["div"] = standings.index.map(team_divisions)
 
+standings = standings
 
+games = games[["away_team","home_team","away_score","home_score"]]
 
 
 #add W/L columns
