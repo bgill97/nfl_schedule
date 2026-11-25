@@ -7,15 +7,48 @@ games = pd.read_csv(url)
 games = games[games["season"] == 2026]
 
 teams = games['away_team'].unique().tolist()
-#test
 
 games = games.dropna(subset=["away_score","home_score"])
 
-standings = pd.DataFrame({"team": teams,"w": 0,"l": 0,"t": 0}).set_index("team")
+team_divisions = {
+    "NE":"AFCE",
+    "NYJ":"AFCE",
+    "MIA":"AFCE",
+    "BUF":"AFCE",
+    "IND":"AFCS",
+    "HOU":"AFCS",
+    "JAX":"AFCS",
+    "TEN":"AFCS",
+    "PIT":"AFCN",
+    "BAL":"AFCN",
+    "CLE":"AFCN",
+    "CIN":"AFCN",
+    "KC":"AFCW",
+    "LV":"AFCW",
+    "DEN":"AFCW",
+    "LAC":"AFCW",
+    "DAL":"NFCE",
+    "WAS":"NFCE",
+    "PHI":"NFCE",
+    "NYG":"NFCE",
+    "NO":"NFCS",
+    "ATL":"NFCS",
+    "CAR":"NFCS",
+    "TB":"NFCS",
+    "GB":"NFCN",
+    "CHI":"NFCN",
+    "DET":"NFCN",
+    "MIN":"NFCN",
+    "SF":"NFCW",
+    "LA":"NFCW",
+    "ARI":"NFCW",
+    "SEA":"NFCW"}
+
+standings = pd.DataFrame({"team": teams,"w": 0,"l": 0,"t": 0})
+standings["div"] = standings["team"].map(team_divisions)
+print(standings)
 
 
-# #remove unnecessary columns
-# games = games.drop(columns=["game_id","season",'game_type', 'week', 'gameday', 'weekday', 'gametime', 'location', 'total', 'overtime', 'old_game_id', 'gsis', 'nfl_detail_id', 'pfr', 'pff', 'espn', 'ftn', 'away_rest', 'home_rest', 'away_moneyline', 'home_moneyline', 'spread_line', 'away_spread_odds', 'home_spread_odds', 'total_line', 'under_odds', 'over_odds', 'div_game', 'roof', 'surface', 'temp', 'wind', 'away_qb_id', 'home_qb_id', 'away_qb_name', 'home_qb_name', 'away_coach', 'home_coach', 'referee', 'stadium_id', 'stadium'])
 
 
 #add W/L columns
