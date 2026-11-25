@@ -7,6 +7,7 @@ games = pd.read_csv(url)
 games = games[games["season"] == 2026]
 
 teams = games['away_team'].unique().tolist()
+#test
 
 games = games.dropna(subset=["away_score","home_score"])
 
