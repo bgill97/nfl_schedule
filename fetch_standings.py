@@ -44,6 +44,10 @@ team_divisions = {
     "ARI":"NFCW",
     "SEA":"NFCW"}
 
+teams = games['away_team'].unique().tolist()
+divisions = set(team_divisions.values())
+print(divisions)
+
 standings = pd.DataFrame({"team": teams,"w": 0,"l": 0,"t": 0}).set_index("team")
 standings["div"] = standings.index.map(team_divisions)
 
@@ -70,3 +74,5 @@ for _,row in games.iterrows():
 standings = standings.sort_values(["w","t"],ascending=False)
 print(standings)
 
+for division in divisions:
+    pass
