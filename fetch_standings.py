@@ -74,5 +74,15 @@ for _,row in games.iterrows():
 standings = standings.sort_values(["w","t"],ascending=False)
 print(standings)
 
-for division in divisions:
-    pass
+division_tables = {}
+
+for division in sorted(divisions):
+    division_tables[division] = (
+        standings[standings["div"] == division]
+        .drop(columns="div")
+        .sort_values(["w","t"],ascending=False)
+    )
+
+for name,table in division_tables.items():
+    print(f"\n{name}")
+    print(table)
